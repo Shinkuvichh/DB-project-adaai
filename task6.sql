@@ -61,3 +61,13 @@ from (select A.product_id,
                join purchases as C on B.purchase_id = C.purchase_id
       group by A.product_id, C.shop_id) as D
 where rank = 1;
+
+
+/* Найдем максимальное количество каждого из товаров на складах */
+select products.product_id,
+       max(coalesce(prods_wareh.product_quantity, 0)) as max_quantity_wareh
+from products
+         left join prods_wareh
+                   on products.product_id = prods_wareh.product_id
+group by products.product_id
+order by products.product_id;
