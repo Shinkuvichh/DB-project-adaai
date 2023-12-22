@@ -71,3 +71,24 @@ from products
                    on products.product_id = prods_wareh.product_id
 group by products.product_id
 order by products.product_id;
+
+-- суммарное количество продуктов на складах от производителей
+select products.product_manufacturer,
+       sum(coalesce(prods_wareh.product_quantity, 0)) as manuf_sum_prod
+from products
+         left join prods_wareh
+                   on products.product_id = prods_wareh.product_id
+group by products.product_manufacturer;
+
+-- продукты ни разу не купленные
+select products.product_id
+from products
+         left join prods_purchase
+                   on products.product_id = prods_purchase.product_id
+where prods_purchase.product_id is null;
+
+-- средняя цена продукта для каждого производителя
+select product_manufacturer,
+       avg(product_price) as avg_price_manuf
+from products
+group by product_manufacturer;
