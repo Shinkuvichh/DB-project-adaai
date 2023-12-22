@@ -42,12 +42,11 @@ select supermarket.shops.shop_id,
        avg(supermarket.products.product_price * supermarket.prods_purchase.product_quantity) as average_receipt
 from supermarket.shops
          join supermarket.purchases
-              on shops.shop_id = purchases.shop_id
+              on shops.shop_id = purchases.shop_id and purchases.purchase_date = '2023-12-24'
          join supermarket.prods_purchase
               on purchases.purchase_id = prods_purchase.purchase_id
          join supermarket.products
               on supermarket.prods_purchase.product_id = products.product_id
-where purchases.purchase_date = '2023-12-24'
 group by shops.shop_id;
 
 
