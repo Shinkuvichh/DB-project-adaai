@@ -1,3 +1,5 @@
+set search_path = supermarket, public;
+
 insert into shops (shop_address, supervisor_email)
 values ('Ул. Менделеева 30/2', '302msvisor@smarket.com'),
        ('Октябрьский проспект 104', '104opsvisor@smarket.com'),
