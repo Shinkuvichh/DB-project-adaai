@@ -91,8 +91,8 @@ values (1, 1, 2),
        (6, 1, 2);
 
 insert into cards_versions (owner_phone, owner_name, owner_email, change_date)
-values ('79173243420', 'Абела', 'abella@y.ru', '2023-12-20'),
-       ('79805406563', 'Cамари', 'samari148@y.com', '2023-12-17');
+values ('79173243420', 'Абела', 'abella@y.ru', '2023-12-20-13:14:15'),
+       ('79805406563', 'Cамари', 'samari148@y.com', '2023-12-17-10:11:12');
 
 
 insert into prods_wareh
