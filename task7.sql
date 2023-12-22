@@ -1,3 +1,5 @@
+create schema if not exists views;
+
 create or replace view views.products as
 select products.product_name,
        products.product_price,
