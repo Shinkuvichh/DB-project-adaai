@@ -46,8 +46,8 @@ select w.warehouse_id,
        w.supervisor_email
 from warehouses w
          inner join prods_wareh pw
-              on w.warehouse_id = pw.warehouse_id
+                    on w.warehouse_id = pw.warehouse_id
          inner join products p
-              on pw.product_id = p.product_id
+                    on pw.product_id = p.product_id
 where pw.product_quantity < 50
 order by w.warehouse_id
