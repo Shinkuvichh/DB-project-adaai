@@ -1,4 +1,4 @@
--- статистика продаж: показывает какие товары когда и где было проданы,
+-- Статистика продаж: показывает какие товары когда и где было проданы,
 -- такая статистика нужна например для того чтобы констатировать факт шоплифтинга
 create or replace view views.sales_statistic as
 select purchases.shop_id,
@@ -15,8 +15,7 @@ order by purchases.shop_id, purchases.purchase_date;
 
 
 
-
--- статистика продаж: показывает сумму покупок за текущий месяц в каждом магазине с картой и без, такая статистика нужна
+-- Представление показывающее сумму покупок за текущий месяц в каждом магазине с картой и без, такое представление нужно
 -- например для того чтобы было понимание, какая из точек нуждается в продвижении, а также на сотрудников какой
 -- точки стоит наложить санкции за низкое количество покупок с картой лояльности
 create or replace view views.shop_spending as
@@ -34,4 +33,21 @@ from shops s
                     on pp.product_id = pr.product_id
          left join cards c
                    on p.card_phone = c.owner_phone
-group by s.shop_id, s.supervisor_email;
+group by s.shop_id, s.supervisor_email
+order by s.shop_id;
+
+
+
+-- Сводка товаров с низким запасом на складе, нужна чтобы понимать что нужно заказывать у оптовиков
+create or replace view views.low_stock as
+select w.warehouse_id,
+       pw.product_id,
+       pw.product_quantity as stock,
+       w.supervisor_email
+from warehouses w
+         inner join prods_wareh pw
+              on w.warehouse_id = pw.warehouse_id
+         inner join products p
+              on pw.product_id = p.product_id
+where pw.product_quantity < 50
+order by w.warehouse_id
